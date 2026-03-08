@@ -1,0 +1,9 @@
+{
+  "name": "S Society Hub - AI Content Factory PRO",
+  "description": "Automate your entire content creation and distribution flow. Create once, publish everywhere automatically.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

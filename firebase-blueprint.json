@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Application user profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "editor", "viewer"] },
+        "plan": { "type": "string", "enum": ["free", "pro", "enterprise"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLogin": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "email", "role", "plan"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Content creation project with multi-step workflow",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "status": { "type": "string" },
+        "currentStep": { "type": "number" },
+        "toolData": { "type": "object" },
+        "assets": { "type": "object" },
+        "botatoWorkflow": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "publishedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "currentStep", "status"]
+    },
+    "Approval": {
+      "title": "Approval",
+      "description": "Step approval log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "step": { "type": "number" },
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "notes": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "projectId", "step", "userId", "action"]
+    },
+    "Analytics": {
+      "title": "Analytics",
+      "description": "Content performance data",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "views": { "type": "number" },
+        "platform": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["id", "userId", "views", "platform", "date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Content creation projects"
+    },
+    "/approvals/{approvalId}": {
+      "schema": "Approval",
+      "description": "Step approval logs"
+    },
+    "/analytics/{analyticsId}": {
+      "schema": "Analytics",
+      "description": "Content performance data"
+    }
+  }
+}
